@@ -22,11 +22,18 @@ class Snake:
         new_s.goto(position)
         self.segments.append(new_s)
 
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.snake_position()
+        self.head = self.segments[0]
+
     def extend(self):
         self.add_segment(self.segments[-1].position())
 
     def move(self):  # Snake constant movement and following of segments
-        for s_num in range(len(self.segments) - 1, 0, -1):  # (start=2 or len() , stop=0, step=-1) to start from back
+        for s_num in range(len(self.segments) - 1, 0, -1):  # start=2 or len()-1 , stop=0, step=-1 to start from back
             new_x = self.segments[s_num - 1].xcor()
             new_y = self.segments[s_num - 1].ycor()
             self.segments[s_num].goto(new_x, new_y)
